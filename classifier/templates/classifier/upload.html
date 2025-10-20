@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Classifier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') no-repeat center center/cover;
+      height: 100vh;
+      color: white;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      margin-top: 10%;
+    }
+    .form-card {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: #333;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .btn-primary {
+      background-color: #ff6f61;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #ff4b3e;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container content">
+    <h1 class="fw-bold mb-4">🍱 Food Classifier</h1>
+    <p class="lead">Upload an image and let AI identify the dish!</p>
+
+    <div class="form-card mt-4">
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary w-100">Upload & Classify</button>
+      </form>
+
+      {% if result %}
+      <div class="alert alert-success mt-4">
+        <h4>Prediction:</h4>
+        <p class="fw-bold">{{ result }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>
